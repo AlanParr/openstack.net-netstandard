@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using net.openstack.Core.Collections;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using ExtensibleJsonObject = net.openstack.Core.Domain.ExtensibleJsonObject;

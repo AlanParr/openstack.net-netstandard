@@ -97,7 +97,7 @@ namespace OpenStack
             {
                 OpenStackNet.Configure();
 
-                await "http://api.com".PrepareRequest().GetAsync();
+                await "http://api.com".PrepareRequest().PrepareGet().SendAsync();
 
                 var userAgent = httpTest.CallLog[0].Request.Headers.UserAgent.ToString();
                 Assert.Contains("openstack.net", userAgent);
@@ -112,7 +112,7 @@ namespace OpenStack
                 OpenStackNet.Configure();
                 OpenStackNet.Configure(); // Duplicate call to Configure should be ignored
 
-                await "http://api.com".PrepareRequest().GetAsync();
+                await "http://api.com".PrepareRequest().PrepareGet().SendAsync();
 
                 var userAgent = httpTest.CallLog[0].Request.Headers.UserAgent.ToString();
                 Assert.Contains("openstack.net", userAgent);
@@ -130,7 +130,7 @@ namespace OpenStack
                     options.UserAgents.Add(new ProductInfoHeaderValue("(unittests)"));
                 };
 
-                await "http://api.com".PrepareRequest().GetAsync();
+                await "http://api.com".PrepareRequest().PrepareGet().SendAsync();
 
                 var userAgent = httpTest.CallLog[0].Request.Headers.UserAgent.ToString();
                 Assert.Contains("openstack.net", userAgent);

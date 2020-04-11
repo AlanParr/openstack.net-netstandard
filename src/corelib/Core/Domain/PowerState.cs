@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Concurrent;
-    using net.openstack.Core.Domain.Converters;
     using Newtonsoft.Json;
 
     /// <summary>

@@ -159,14 +159,14 @@ namespace OpenStack
     public class OpenStackNetConfigurationOptions
     {
         private bool _isInitialized;
-        private readonly FlurlHttpSettings _flurlHttpSettings;
+        private readonly ClientFlurlHttpSettings _flurlHttpSettings;
         private readonly JsonSerializerSettings _jsonSerializerSettings;
         private readonly List<ProductInfoHeaderValue> _userAgents;
 
         /// <summary/>
         protected OpenStackNetConfigurationOptions()
         {
-            _flurlHttpSettings = new FlurlHttpSettings();
+            _flurlHttpSettings = new ClientFlurlHttpSettings();
             _jsonSerializerSettings = new JsonSerializerSettings();
             _userAgents = new List<ProductInfoHeaderValue>();
         }
@@ -197,7 +197,7 @@ namespace OpenStack
         /// <summary>
         /// Custom Flurl.Http configuration settings which are specific to requests made by this SDK.
         /// </summary>
-        public FlurlHttpSettings FlurlHttpSettings
+        public ClientFlurlHttpSettings FlurlHttpSettings
         {
             get
             {

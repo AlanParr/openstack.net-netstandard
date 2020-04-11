@@ -14,7 +14,7 @@ namespace OpenStack
         {
             using (var httpTest = new HttpTest())
             {
-                httpTest.RespondWith((int)HttpStatusCode.Unauthorized, "Your token has expired");
+                httpTest.RespondWith("Your token has expired", (int)HttpStatusCode.Unauthorized);
                 httpTest.RespondWithJson(new Flavor());
 
                 var service = new ContentDeliveryNetworkService(Stubs.AuthenticationProvider, "DFW");
@@ -28,8 +28,8 @@ namespace OpenStack
         {
             using (var httpTest = new HttpTest())
             {
-                httpTest.RespondWith((int)HttpStatusCode.Unauthorized, "Your token has expired");
-                httpTest.RespondWith((int)HttpStatusCode.Unauthorized, "Your token has expired");
+                httpTest.RespondWith("Your token has expired", (int)HttpStatusCode.Unauthorized);
+                httpTest.RespondWith("Your token has expired", (int)HttpStatusCode.Unauthorized);
 
                 var service = new ContentDeliveryNetworkService(Stubs.AuthenticationProvider, "DFW");
                 await Assert.ThrowsAsync<FlurlHttpException>(() => service.GetFlavorAsync("flavor-id"));

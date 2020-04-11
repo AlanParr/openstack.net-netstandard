@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http.Headers;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using JSIStudios.SimpleRESTServices.Client;
@@ -986,7 +985,7 @@ namespace net.openstack.Providers.Rackspace
         /// <para>If <paramref name="parameters"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <preliminary/>
-        protected Func<Task<Tuple<IdentityToken, Uri>>, HttpWebRequest> PrepareRequestAsyncFunc(HttpMethod method, UriTemplate template, IDictionary<string, string> parameters, Func<Uri, Uri> uriTransform = null)
+        protected Func<Task<Tuple<IdentityToken, Uri>>, HttpWebRequest> PrepareRequestAsyncFunc(HttpMethod method, UriTemplate.Core.UriTemplate template, IDictionary<string, string> parameters, Func<Uri, Uri> uriTransform = null)
         {
             if (template == null)
                 throw new ArgumentNullException("template");
@@ -1022,7 +1021,7 @@ namespace net.openstack.Providers.Rackspace
         /// <para>If <paramref name="parameters"/> is <see langword="null"/>.</para>
         /// </exception>
         /// <preliminary/>
-        protected Func<Task<Tuple<IdentityToken, Uri>>, Task<HttpWebRequest>> PrepareRequestAsyncFunc<TBody>(HttpMethod method, UriTemplate template, IDictionary<string, string> parameters, TBody body, Func<Uri, Uri> uriTransform = null)
+        protected Func<Task<Tuple<IdentityToken, Uri>>, Task<HttpWebRequest>> PrepareRequestAsyncFunc<TBody>(HttpMethod method, UriTemplate.Core.UriTemplate template, IDictionary<string, string> parameters, TBody body, Func<Uri, Uri> uriTransform = null)
         {
             return
                 task =>
@@ -1128,7 +1127,7 @@ namespace net.openstack.Providers.Rackspace
         /// </exception>
         /// <exception cref="ArgumentException">If <paramref name="baseUri"/> is not an absolute URI.</exception>
         /// <preliminary/>
-        protected virtual HttpWebRequest PrepareRequestImpl(HttpMethod method, IdentityToken identityToken, UriTemplate template, Uri baseUri, IDictionary<string, string> parameters, Func<Uri, Uri> uriTransform)
+        protected virtual HttpWebRequest PrepareRequestImpl(HttpMethod method, IdentityToken identityToken, UriTemplate.Core.UriTemplate template, Uri baseUri, IDictionary<string, string> parameters, Func<Uri, Uri> uriTransform)
         {
             Uri boundUri = template.BindByName(baseUri, parameters);
             if (uriTransform != null)

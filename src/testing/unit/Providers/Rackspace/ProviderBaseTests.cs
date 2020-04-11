@@ -3,7 +3,6 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using JSIStudios.SimpleRESTServices.Client;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Moq.Protected;
 using net.openstack.Core;
@@ -12,16 +11,16 @@ using net.openstack.Core.Providers;
 using net.openstack.Providers.Rackspace;
 using net.openstack.Providers.Rackspace.Objects;
 using Newtonsoft.Json;
+using Xunit;
 
 namespace OpenStackNet.Testing.Unit.Providers.Rackspace
 {
-    [TestClass]
     public class ProviderBaseTests
     {
         private const string _testService = "test";
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_Correct_Endpoint_When_Identity_Is_Explicitly_Set_And_Region_Is_Explicitly_Declared()
         {
             UserAccess userAccess = JsonConvert.DeserializeObject<UserAccess>(
@@ -33,12 +32,12 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
 
             var endpoint = provider.GetEndpoint(_testService, "DFW", new CloudIdentity());
 
-            Assert.IsNotNull(endpoint);
-            Assert.AreEqual("DFW", endpoint.Region);
+            Assert.NotNull(endpoint);
+            Assert.Equal("DFW", endpoint.Region);
         }
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_Correct_Endpoint_When_Identity_Is_Explicitly_Set_And_Region_Is_Different_Than_Default_Region()
         {
             UserAccess userAccess = JsonConvert.DeserializeObject<UserAccess>(
@@ -50,12 +49,12 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
 
             var endpoint = provider.GetEndpoint(_testService, "ORD", new CloudIdentity());
 
-            Assert.IsNotNull(endpoint);
-            Assert.AreEqual("ORD", endpoint.Region);
+            Assert.NotNull(endpoint);
+            Assert.Equal("ORD", endpoint.Region);
         }
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_Correct_Endpoint_When_Identity_Set_On_Provider_And_Region_Is_Different_Than_Default_Region()
         {
             UserAccess userAccess = JsonConvert.DeserializeObject<UserAccess>(
@@ -67,12 +66,12 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
 
             var endpoint = provider.GetEndpoint(_testService, "ORD", null);
 
-            Assert.IsNotNull(endpoint);
-            Assert.AreEqual("ORD", endpoint.Region);
+            Assert.NotNull(endpoint);
+            Assert.Equal("ORD", endpoint.Region);
         }
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_Correct_Endpoint_When_Identity_Is_Explicitly_Set_And_Region_Is_NOT_Explicitly_Declared()
         {
             UserAccess userAccess = JsonConvert.DeserializeObject<UserAccess>(
@@ -84,12 +83,12 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
 
             var endpoint = provider.GetEndpoint(_testService, null, new CloudIdentity());
 
-            Assert.IsNotNull(endpoint);
-            Assert.AreEqual("DFW", endpoint.Region);
+            Assert.NotNull(endpoint);
+            Assert.Equal("DFW", endpoint.Region);
         }
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_Correct_Endpoint_When_Identity_Is_Set_On_Provider_And_Region_Is_Explicitly_Declared()
         {
             UserAccess userAccess = JsonConvert.DeserializeObject<UserAccess>(
@@ -101,12 +100,12 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
 
             var endpoint = provider.GetEndpoint(_testService, "DFW", null);
 
-            Assert.IsNotNull(endpoint);
-            Assert.AreEqual("DFW", endpoint.Region);
+            Assert.NotNull(endpoint);
+            Assert.Equal("DFW", endpoint.Region);
         }
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_Correct_Endpoint_When_Identity_Is_Set_On_Provider_And_Region_Is_NOT_Explicitly_Declared()
         {
             UserAccess userAccess = JsonConvert.DeserializeObject<UserAccess>(
@@ -118,12 +117,12 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
 
             var endpoint = provider.GetEndpoint(_testService, null, null);
 
-            Assert.IsNotNull(endpoint);
-            Assert.AreEqual("DFW", endpoint.Region);
+            Assert.NotNull(endpoint);
+            Assert.Equal("DFW", endpoint.Region);
         }
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_Correct_LON_Endpoint_When_Identity_Is_Explicitly_Set_And_Region_Is_Explicitly_Declared()
         {
             UserAccess userAccess = JsonConvert.DeserializeObject<UserAccess>(
@@ -135,12 +134,12 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
 
             var endpoint = provider.GetEndpoint(_testService, "LON", new RackspaceCloudIdentity());
 
-            Assert.IsNotNull(endpoint);
-            Assert.AreEqual("LON", endpoint.Region);
+            Assert.NotNull(endpoint);
+            Assert.Equal("LON", endpoint.Region);
         }
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_Correct_LON_Endpoint_When_Identity_Is_Explicitly_Set_And_Region_Is_NOT_Explicitly_Declared()
         {
             UserAccess userAccess = JsonConvert.DeserializeObject<UserAccess>(
@@ -152,12 +151,12 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
 
             var endpoint = provider.GetEndpoint(_testService, null, new RackspaceCloudIdentity());
 
-            Assert.IsNotNull(endpoint);
-            Assert.AreEqual("LON", endpoint.Region);
+            Assert.NotNull(endpoint);
+            Assert.Equal("LON", endpoint.Region);
         }
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_Correct_LON_Endpoint_When_Identity_Is_Set_On_Provider_And_Region_Is_Explicitly_Declared()
         {
             UserAccess userAccess = JsonConvert.DeserializeObject<UserAccess>(
@@ -169,12 +168,12 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
 
             var endpoint = provider.GetEndpoint(_testService, "LON", null);
 
-            Assert.IsNotNull(endpoint);
-            Assert.AreEqual("LON", endpoint.Region);
+            Assert.NotNull(endpoint);
+            Assert.Equal("LON", endpoint.Region);
         }
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_Correct_LON_Endpoint_When_Identity_Is_Set_On_Provider_And_Region_Is_NOT_Explicitly_Declared()
         {
             UserAccess userAccess = JsonConvert.DeserializeObject<UserAccess>(
@@ -186,12 +185,12 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
 
             var endpoint = provider.GetEndpoint(_testService, null, null);
 
-            Assert.IsNotNull(endpoint);
-            Assert.AreEqual("LON", endpoint.Region);
+            Assert.NotNull(endpoint);
+            Assert.Equal("LON", endpoint.Region);
         }
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_Correct_LON_Endpoint_When_Identity_Is_Explicitly_And_Region_Is_Always_Empty()
         {
             UserAccess userAccess = JsonConvert.DeserializeObject<UserAccess>(
@@ -203,34 +202,34 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
 
             var endpoint = provider.GetEndpoint(_testService, null, new RackspaceCloudIdentity());
 
-            Assert.IsNotNull(endpoint);
-            Assert.AreEqual("LON", endpoint.Region);
+            Assert.NotNull(endpoint);
+            Assert.Equal("LON", endpoint.Region);
         }
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_Null_While_Building_Optional_Parameter_List_When_A_Null_Value_Is_Passed()
         {
             var providerBase = new MockProvider(null, null, null);
 
             var paramList = providerBase.BuildOptionalParameterList(null);
 
-            Assert.IsNull(paramList);
+            Assert.Null(paramList);
         }
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_Null_While_Building_Optional_Parameter_List_When_An_Empty_Value_Is_Passed()
         {
             var providerBase = new MockProvider(null, null, null);
 
             var paramList = providerBase.BuildOptionalParameterList(new Dictionary<string, string>());
 
-            Assert.IsNull(paramList);
+            Assert.Null(paramList);
         }
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_Null_While_Building_Optional_Parameter_List_When_All_Values_In_List_Are_InValid()
         {
             var providerBase = new MockProvider(null, null, null);
@@ -243,11 +242,11 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
                     {"key4", null},
                 });
 
-            Assert.IsNull(paramList);
+            Assert.Null(paramList);
         }
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_All_Parameters_While_Building_Optional_Parameter_List_When_All_Values_In_List_Are_Valid()
         {
             var providerBase = new MockProvider(null, null, null);
@@ -260,15 +259,15 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
                     {"key4", "val4"},
                 });
 
-            Assert.AreEqual(4, paramList.Count);
-            Assert.IsTrue(paramList.Any(p => p.Key == "key1" && p.Value == "val1"));
-            Assert.IsTrue(paramList.Any(p => p.Key == "key2" && p.Value == "val2"));
-            Assert.IsTrue(paramList.Any(p => p.Key == "key3" && p.Value == "val3"));
-            Assert.IsTrue(paramList.Any(p => p.Key == "key4" && p.Value == "val4"));
+            Assert.Equal(4, paramList.Count);
+            Assert.True(paramList.Any(p => p.Key == "key1" && p.Value == "val1"));
+            Assert.True(paramList.Any(p => p.Key == "key2" && p.Value == "val2"));
+            Assert.True(paramList.Any(p => p.Key == "key3" && p.Value == "val3"));
+            Assert.True(paramList.Any(p => p.Key == "key4" && p.Value == "val4"));
         }
 
-        [TestMethod]
-        [TestCategory(TestCategories.Unit)]
+        [Fact]
+        [Trait("Category", TestCategories.Unit)]
         public void Should_Return_Only_Valid_Parameters_While_Building_Optional_Parameter_List_When_Some_Values_In_List_Are_Valid()
         {
             var providerBase = new MockProvider(null, null, null);
@@ -281,11 +280,11 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
                     {"key4", null},
                 });
 
-            Assert.AreEqual(2, paramList.Count);
-            Assert.IsTrue(paramList.Any(p => p.Key == "key1" && p.Value == "val1"));
-            Assert.IsFalse(paramList.Any(p => p.Key == "key2" && p.Value == "val2"));
-            Assert.IsTrue(paramList.Any(p => p.Key == "key3" && p.Value == "val3"));
-            Assert.IsFalse(paramList.Any(p => p.Key == "key4" && p.Value == "val4"));
+            Assert.Equal(2, paramList.Count);
+            Assert.True(paramList.Any(p => p.Key == "key1" && p.Value == "val1"));
+            Assert.False(paramList.Any(p => p.Key == "key2" && p.Value == "val2"));
+            Assert.True(paramList.Any(p => p.Key == "key3" && p.Value == "val3"));
+            Assert.False(paramList.Any(p => p.Key == "key4" && p.Value == "val4"));
         }
 
 

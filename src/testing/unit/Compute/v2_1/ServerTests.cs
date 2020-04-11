@@ -324,7 +324,7 @@ namespace OpenStack.Compute.v2_1
             using (var httpTest = new HttpTest())
             {
                 Identifier serverId = Guid.NewGuid();
-                httpTest.RespondWith((int)HttpStatusCode.NoContent, "All gone!");
+                httpTest.RespondWith("All gone!", (int)HttpStatusCode.NoContent);
 
                 _compute.DeleteServer(serverId);
 
@@ -339,7 +339,7 @@ namespace OpenStack.Compute.v2_1
             {
                 Identifier serverId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Server {Id = serverId});
-                httpTest.RespondWith((int)HttpStatusCode.NoContent, "All gone!");
+                httpTest.RespondWith("All gone!", (int)HttpStatusCode.NoContent);
                 httpTest.RespondWithJson(new Server { Id = serverId, Status = ServerStatus.Deleted});
 
                 var server =_compute.GetServer(serverId);
@@ -357,7 +357,7 @@ namespace OpenStack.Compute.v2_1
             using (var httpTest = new HttpTest())
             {
                 Identifier serverId = Guid.NewGuid();
-                httpTest.RespondWith((int)HttpStatusCode.NotFound, "Not here, boss...");
+                httpTest.RespondWith("Not here, boss...", (int)HttpStatusCode.NotFound);
 
                 _compute.DeleteServer(serverId);
 
@@ -382,7 +382,7 @@ namespace OpenStack.Compute.v2_1
                         [key] = "things"
                     }
                 });
-                httpTest.RespondWith((int)responseCode, "All gone!");
+                httpTest.RespondWith("All gone!", (int)responseCode);
 
                 var server = _compute.GetServer(serverId);
 
@@ -399,7 +399,7 @@ namespace OpenStack.Compute.v2_1
             {
                 Identifier serverId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Server { Id = serverId, Status = ServerStatus.Active });
-                httpTest.RespondWith((int)HttpStatusCode.NoContent, "All gone!");
+                httpTest.RespondWith("All gone!", (int)HttpStatusCode.NoContent);
                 httpTest.RespondWithJson(new Server { Id = serverId, Status = ServerStatus.Deleted });
 
                 var result = _compute.GetServer(serverId);
@@ -417,8 +417,8 @@ namespace OpenStack.Compute.v2_1
             {
                 Identifier serverId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Server { Id = serverId, Status = ServerStatus.Active });
-                httpTest.RespondWith((int)HttpStatusCode.NoContent, "All gone!");
-                httpTest.RespondWith((int)HttpStatusCode.NotFound, "Nothing here, boss");
+                httpTest.RespondWith("All gone!", (int)HttpStatusCode.NoContent);
+                httpTest.RespondWith("Nothing here, boss", (int)HttpStatusCode.NotFound);
 
                 var result = _compute.GetServer(serverId);
                 result.Delete();
@@ -436,7 +436,7 @@ namespace OpenStack.Compute.v2_1
                 Identifier serverId = Guid.NewGuid();
                 Identifier imageId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Server { Id = serverId });
-                httpTest.RespondWith((int)HttpStatusCode.Accepted, "Roger that, boss");
+                httpTest.RespondWith("Roger that, boss", (int)HttpStatusCode.Accepted);
                 httpTest.ResponseQueue.Last().Headers.Location = new Uri($"http://api.example.com/images/{imageId}");
                 httpTest.RespondWithJson(new Image { Id = imageId });
 
@@ -444,7 +444,7 @@ namespace OpenStack.Compute.v2_1
                 Image result = server.Snapshot(new SnapshotServerRequest("{image-name"));
 
                 httpTest.ShouldHaveCalled($"*/servers/{serverId}/action");
-                Assert.Contains("createImage", httpTest.CallLog.First(x => x.Url.EndsWith("/action")).RequestBody);
+                Assert.Contains("createImage", httpTest.CallLog.First(x => x.FlurlRequest.Url.ToString().EndsWith("/action")).RequestBody);
                 Assert.NotNull(result);
                 Assert.Equal(imageId, result.Id);
             }
@@ -457,7 +457,7 @@ namespace OpenStack.Compute.v2_1
             {
                 Identifier serverId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Server { Id = serverId });
-                httpTest.RespondWith((int)HttpStatusCode.Accepted, "Roger that, boss");
+                httpTest.RespondWith("Roger that, boss", (int)HttpStatusCode.Accepted);
 
                 var server = _compute.GetServer(serverId);
                 server.Start();
@@ -474,7 +474,7 @@ namespace OpenStack.Compute.v2_1
             {
                 Identifier serverId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Server { Id = serverId });
-                httpTest.RespondWith((int)HttpStatusCode.Accepted, "Roger that, boss");
+                httpTest.RespondWith("Roger that, boss", (int)HttpStatusCode.Accepted);
 
                 var server = _compute.GetServer(serverId);
                 server.Stop();
@@ -491,7 +491,7 @@ namespace OpenStack.Compute.v2_1
             {
                 Identifier serverId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Server { Id = serverId });
-                httpTest.RespondWith((int)HttpStatusCode.Accepted, "Roger that, boss");
+                httpTest.RespondWith("Roger that, boss", (int)HttpStatusCode.Accepted);
 
                 var server = _compute.GetServer(serverId);
                 server.Suspend();
@@ -508,7 +508,7 @@ namespace OpenStack.Compute.v2_1
             {
                 Identifier serverId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Server { Id = serverId });
-                httpTest.RespondWith((int)HttpStatusCode.Accepted, "Roger that, boss");
+                httpTest.RespondWith("Roger that, boss", (int)HttpStatusCode.Accepted);
 
                 var server = _compute.GetServer(serverId);
                 server.Resume();
@@ -525,7 +525,7 @@ namespace OpenStack.Compute.v2_1
             {
                 Identifier serverId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Server { Id = serverId });
-                httpTest.RespondWith((int)HttpStatusCode.Accepted, "Roger that, boss");
+                httpTest.RespondWith("Roger that, boss", (int)HttpStatusCode.Accepted);
 
                 var server = _compute.GetServer(serverId);
                 server.Reboot(new RebootServerRequest {Type = RebootType.Hard});
@@ -570,7 +570,7 @@ namespace OpenStack.Compute.v2_1
                     Id = serverId,
                     AttachedVolumes = { new ServerVolume { Id = volumeId, DeviceName = "/dev/vdd" } }
                 });
-                httpTest.RespondWith((int)HttpStatusCode.Accepted, "Roger that, good buddy");
+                httpTest.RespondWith("Roger that, good buddy", (int)HttpStatusCode.Accepted);
 
                 var server = _compute.GetServer(serverId);
                 ServerVolumeReference attachedVolume = server.AttachedVolumes[0];
@@ -766,7 +766,7 @@ namespace OpenStack.Compute.v2_1
                 Identifier flavorId = "1";
                 Identifier serverId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Server { Id = serverId });
-                httpTest.RespondWith((int)HttpStatusCode.Accepted, "Roger that, good buddy!");
+                httpTest.RespondWith("Roger that, good buddy!", (int)HttpStatusCode.Accepted);
 
                 var server = _compute.GetServer(serverId);
                 server.Resize(flavorId);
@@ -784,8 +784,8 @@ namespace OpenStack.Compute.v2_1
                 Identifier flavorId = "1";
                 Identifier serverId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Server { Id = serverId });
-                httpTest.RespondWith((int)HttpStatusCode.Accepted, "Roger that, good buddy!");
-                httpTest.RespondWith((int)HttpStatusCode.Accepted, "Roger that, good buddy!");
+                httpTest.RespondWith("Roger that, good buddy!", (int)HttpStatusCode.Accepted);
+                httpTest.RespondWith("Roger that, good buddy!", (int)HttpStatusCode.Accepted);
 
                 var server = _compute.GetServer(serverId);
                 server.Resize(flavorId);
@@ -804,8 +804,8 @@ namespace OpenStack.Compute.v2_1
                 Identifier flavorId = "1";
                 Identifier serverId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Server { Id = serverId });
-                httpTest.RespondWith((int)HttpStatusCode.Accepted, "Roger that, good buddy!");
-                httpTest.RespondWith((int)HttpStatusCode.Accepted, "Roger that, good buddy!");
+                httpTest.RespondWith("Roger that, good buddy!", (int)HttpStatusCode.Accepted);
+                httpTest.RespondWith("Roger that, good buddy!", (int)HttpStatusCode.Accepted);
 
                 var server = _compute.GetServer(serverId);
                 server.Resize(flavorId);

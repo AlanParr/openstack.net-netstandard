@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Flurl.Http;
@@ -41,7 +40,7 @@ namespace Flurl.Extensions
         /// <param name="url">The URL.</param>
         public static Url RemoveNullOrEmptyQueryParams(this Url url)
         {
-            foreach (KeyValuePair<string, object> queryParam in url.QueryParams.ToList())
+            foreach (var queryParam in url.QueryParams.ToList())
             {
                 if (queryParam.Value == null || queryParam.Value.ToString() == string.Empty)
                     url.QueryParams.Remove(queryParam);
@@ -91,7 +90,7 @@ namespace Flurl.Extensions
         /// <param name="url">The URL.</param>
         public static PreparedRequest PrepareRequest(this Url url)
         {
-            return new PreparedRequest(url, autoDispose: true)
+            return new PreparedRequest(url)
             {
                 Settings = OpenStackNet.Configuration.FlurlHttpSettings
             };

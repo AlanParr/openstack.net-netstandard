@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.ObjectModel;
-    using net.openstack.Core.Domain;
     using net.openstack.Core.Domain.Queues;
     using CancellationToken = System.Threading.CancellationToken;
     using IQueueingService = net.openstack.Core.Providers.IQueueingService;

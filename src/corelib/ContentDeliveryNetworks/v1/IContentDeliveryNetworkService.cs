@@ -4,7 +4,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Flurl.Http;
-using Marvin.JsonPatch;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace OpenStack.ContentDeliveryNetworks.v1
 {

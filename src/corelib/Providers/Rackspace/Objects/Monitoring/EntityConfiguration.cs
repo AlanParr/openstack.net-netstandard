@@ -5,7 +5,6 @@ namespace net.openstack.Providers.Rackspace.Objects.Monitoring
     using System;
     using System.Collections.Generic;
     using System.Net;
-    using net.openstack.Core.Collections;
     using net.openstack.Core.Domain.Converters;
     using Newtonsoft.Json;
     using ExtensibleJsonObject = net.openstack.Core.Domain.ExtensibleJsonObject;

@@ -1,13 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using OpenStack.Networking.v2.Serialization;
-using OpenStack.Serialization;
 using OpenStack.Synchronous.Extensions;
-using Flurl.Extensions;
-using Flurl.Http;
 
 namespace OpenStack.Networking.v2.Layer3
 {

@@ -17,6 +17,7 @@
     using HttpResponseCodeValidator = net.openstack.Providers.Rackspace.Validators.HttpResponseCodeValidator;
     using IHttpResponseCodeValidator = net.openstack.Core.Validators.IHttpResponseCodeValidator;
     using JsonRestServices = JSIStudios.SimpleRESTServices.Client.Json.JsonRestServices;
+    using UriTemplate = UriTemplate.Core.UriTemplate;
 
     /// <summary>
     /// Provides an implementation of <see cref="IDnsService"/> for operating

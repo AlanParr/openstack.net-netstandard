@@ -11,6 +11,7 @@
     using net.openstack.Core.Providers;
     using net.openstack.Providers.Rackspace.Objects.Monitoring;
     using Newtonsoft.Json.Linq;
+    using UriTemplate.Core;
     using CancellationToken = System.Threading.CancellationToken;
     using HttpMethod = JSIStudios.SimpleRESTServices.Client.HttpMethod;
     using HttpResponseCodeValidator = net.openstack.Providers.Rackspace.Validators.HttpResponseCodeValidator;
@@ -184,7 +185,7 @@
                     UriTemplate entityTemplate = new UriTemplate("/entities/{entityId}");
                     string location = task.Result.Item1.Headers[HttpResponseHeader.Location];
                     UriTemplateMatch match = entityTemplate.Match(_baseUri, new Uri(location));
-                    return InternalTaskExtensions.CompletedTask(new EntityId(match.BoundVariables["entityId"]));
+                    return InternalTaskExtensions.CompletedTask(new EntityId(match.Bindings["entityId"].Value.ToString()));
                 };
 
             Func<Task<HttpWebRequest>, Task<EntityId>> requestResource =
@@ -322,7 +323,7 @@
                     UriTemplate entityTemplate = new UriTemplate("/entities/{entityId}/checks/{checkId}");
                     string location = task.Result.Item1.Headers[HttpResponseHeader.Location];
                     UriTemplateMatch match = entityTemplate.Match(_baseUri, new Uri(location));
-                    return InternalTaskExtensions.CompletedTask(new CheckId(match.BoundVariables["checkId"]));
+                    return InternalTaskExtensions.CompletedTask(new CheckId(match.Bindings["checkId"].Value.ToString()));
                 };
 
             Func<Task<HttpWebRequest>, Task<CheckId>> requestResource =
@@ -692,7 +693,7 @@
                     UriTemplate entityTemplate = new UriTemplate("/entities/{entityId}/alarms/{alarmId}");
                     string location = task.Result.Item1.Headers[HttpResponseHeader.Location];
                     UriTemplateMatch match = entityTemplate.Match(_baseUri, new Uri(location));
-                    return InternalTaskExtensions.CompletedTask(new AlarmId(match.BoundVariables["alarmId"]));
+                    return InternalTaskExtensions.CompletedTask(new AlarmId(match.Bindings["alarmId"].Value.ToString()));
                 };
 
             Func<Task<HttpWebRequest>, Task<AlarmId>> requestResource =
@@ -858,9 +859,9 @@
                     UriTemplate entityTemplate = new UriTemplate("/notification_plans/{notificationPlanId}");
                     string location = task.Result.Item1.Headers[HttpResponseHeader.Location];
                     UriTemplateMatch match = entityTemplate.Match(_baseUri, new Uri(location));
-                    return InternalTaskExtensions.CompletedTask(new NotificationPlanId(match.BoundVariables["notificationPlanId"]));
+                    return InternalTaskExtensions.CompletedTask(new NotificationPlanId(match.Bindings["notificationPlanId"].Value.ToString()));
                 };
-
+            
             Func<Task<HttpWebRequest>, Task<NotificationPlanId>> requestResource =
                 GetResponseAsyncFunc(cancellationToken, parseResult);
 
@@ -1199,7 +1200,7 @@
                     UriTemplate entityTemplate = new UriTemplate("/notifications/{notificationId}");
                     string location = task.Result.Item1.Headers[HttpResponseHeader.Location];
                     UriTemplateMatch match = entityTemplate.Match(_baseUri, new Uri(location));
-                    return InternalTaskExtensions.CompletedTask(new NotificationId(match.BoundVariables["notificationId"]));
+                    return InternalTaskExtensions.CompletedTask(new NotificationId(match.Bindings["notificationId"].Value.ToString()));
                 };
 
             Func<Task<HttpWebRequest>, Task<NotificationId>> requestResource =
@@ -1783,7 +1784,7 @@
                     UriTemplate agentTokenTemplate = new UriTemplate("/agent_tokens/{tokenId}");
                     string location = task.Result.Item1.Headers[HttpResponseHeader.Location];
                     UriTemplateMatch match = agentTokenTemplate.Match(_baseUri, new Uri(location));
-                    return InternalTaskExtensions.CompletedTask(new AgentTokenId(match.BoundVariables["tokenId"]));
+                    return InternalTaskExtensions.CompletedTask(new AgentTokenId(match.Bindings["tokenId"].Value.ToString()));
                 };
 
             Func<Task<HttpWebRequest>, Task<AgentTokenId>> requestResource =

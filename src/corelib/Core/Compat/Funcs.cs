@@ -25,9 +25,8 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 //
 
-using System.Runtime.CompilerServices;
-
-namespace net.openstack.Core {
+namespace net.openstack.Core
+{
 
 #if NET35
     /// <summary>

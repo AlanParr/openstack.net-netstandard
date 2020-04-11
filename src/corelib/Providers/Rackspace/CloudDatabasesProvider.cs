@@ -18,6 +18,7 @@
     using IHttpResponseCodeValidator = net.openstack.Core.Validators.IHttpResponseCodeValidator;
     using IRestService = JSIStudios.SimpleRESTServices.Client.IRestService;
     using JsonRestServices = JSIStudios.SimpleRESTServices.Client.Json.JsonRestServices;
+    using UriTemplate = UriTemplate.Core.UriTemplate;
 
     /// <summary>
     /// Provides an implementation of <see cref="IDatabaseService"/> for operating

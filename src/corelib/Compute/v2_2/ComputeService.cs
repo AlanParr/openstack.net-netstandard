@@ -1,9 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using OpenStack.Authentication;
-using OpenStack.Compute.v2_1;
 using OpenStack.Compute.v2_2.Serialization;
-using OpenStack.Serialization;
 
 namespace OpenStack.Compute.v2_2
 {

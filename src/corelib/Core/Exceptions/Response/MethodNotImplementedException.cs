@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using System.Runtime.Serialization;
 using RestResponse = JSIStudios.SimpleRESTServices.Client.Response;
 
 namespace net.openstack.Core.Exceptions.Response

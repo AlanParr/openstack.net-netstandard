@@ -1,6 +1,5 @@
 ﻿namespace net.openstack.Providers.Rackspace.Objects.Monitoring
 {
-    using System.Collections.Generic;
     using Newtonsoft.Json;
 
     /// <summary>

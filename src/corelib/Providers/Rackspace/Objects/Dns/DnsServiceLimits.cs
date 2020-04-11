@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using net.openstack.Core.Collections;
     using Newtonsoft.Json;
     using CancellationToken = System.Threading.CancellationToken;
     using ExtensibleJsonObject = net.openstack.Core.Domain.ExtensibleJsonObject;

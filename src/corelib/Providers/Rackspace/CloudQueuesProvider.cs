@@ -107,7 +107,7 @@
                 return InternalTaskExtensions.CompletedTask(_homeDocument);
             }
 
-            UriTemplate template = new UriTemplate("/");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/");
             Func<Task<Tuple<IdentityToken, Uri>>, HttpWebRequest> prepareRequest =
                 PrepareRequestAsyncFunc(HttpMethod.GET, template, new Dictionary<string, string>());
 
@@ -130,7 +130,7 @@
         /// <inheritdoc/>
         public Task GetNodeHealthAsync(CancellationToken cancellationToken)
         {
-            UriTemplate template = new UriTemplate("/health");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/health");
             Func<Task<Tuple<IdentityToken, Uri>>, HttpWebRequest> prepareRequest =
                 PrepareRequestAsyncFunc(HttpMethod.HEAD, template, new Dictionary<string, string>());
 
@@ -148,7 +148,7 @@
             if (queueName == null)
                 throw new ArgumentNullException("queueName");
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}");
             var parameters = new Dictionary<string, string>
                 {
                     { "queue_name", queueName.Value }
@@ -180,7 +180,7 @@
             if (limit <= 0)
                 throw new ArgumentOutOfRangeException("limit");
 
-            UriTemplate template = new UriTemplate("/queues?marker={marker}&limit={limit}&detailed={detailed}");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues?marker={marker}&limit={limit}&detailed={detailed}");
             var parameters = new Dictionary<string, string>
                 {
                     { "detailed", detailed.ToString().ToLowerInvariant() },
@@ -224,7 +224,7 @@
             if (queueName == null)
                 throw new ArgumentNullException("queueName");
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}");
             var parameters = new Dictionary<string, string>() { { "queue_name", queueName.Value } };
             Func<Task<Tuple<IdentityToken, Uri>>, HttpWebRequest> prepareRequest =
                 PrepareRequestAsyncFunc(HttpMethod.HEAD, template, parameters);
@@ -272,7 +272,7 @@
             if (queueName == null)
                 throw new ArgumentNullException("queueName");
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}");
             var parameters = new Dictionary<string, string>
                 {
                     { "queue_name", queueName.Value }
@@ -296,7 +296,7 @@
             if (queueName == null)
                 throw new ArgumentNullException("queueName");
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}/metadata");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}/metadata");
             var parameters = new Dictionary<string, string>
                 {
                     { "queue_name", queueName.Value }
@@ -329,7 +329,7 @@
             if (queueName == null)
                 throw new ArgumentNullException("queueName");
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}/metadata");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}/metadata");
             var parameters = new Dictionary<string, string>
                 {
                     { "queue_name", queueName.Value }
@@ -352,7 +352,7 @@
             if (queueName == null)
                 throw new ArgumentNullException("queueName");
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}/stats");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}/stats");
             var parameters = new Dictionary<string, string>() { { "queue_name", queueName.Value } };
             Func<Task<Tuple<IdentityToken, Uri>>, HttpWebRequest> prepareRequest =
                 PrepareRequestAsyncFunc(HttpMethod.GET, template, parameters);
@@ -373,7 +373,7 @@
             if (limit <= 0)
                 throw new ArgumentOutOfRangeException("limit");
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}/messages?marker={marker}&limit={limit}&echo={echo}&include_claimed={include_claimed}");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}/messages?marker={marker}&limit={limit}&echo={echo}&include_claimed={include_claimed}");
 
             var parameters =
                 new Dictionary<string, string>()
@@ -413,9 +413,9 @@
                             else
                                 absoluteUri = new Uri(baseUri, nextLink.Href);
 
-                            UriTemplateMatch match = template.Match(baseUri, absoluteUri);
-                            if (!string.IsNullOrEmpty(match.BoundVariables["marker"]))
-                                nextMarker = new QueuedMessageListId(match.BoundVariables["marker"]);
+                            UriTemplate.Core.UriTemplateMatch match = template.Match(baseUri, absoluteUri);
+                            if (!string.IsNullOrEmpty(match.Bindings["marker"].Value.ToString()))
+                                nextMarker = new QueuedMessageListId(match.Bindings["marker"].Value.ToString());
                         }
                     }
 
@@ -451,7 +451,7 @@
             if (messageId == null)
                 throw new ArgumentNullException("messageId");
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}/messages/{message_id}");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}/messages/{message_id}");
 
             var parameters =
                 new Dictionary<string, string>()
@@ -481,7 +481,7 @@
             if (messageIds.Contains(null))
                 throw new ArgumentException("messageIds cannot contain any null values");
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}/messages?ids={ids}");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}/messages?ids={ids}");
 
             var parameters =
                 new Dictionary<string, string>()
@@ -531,7 +531,7 @@
                     .Select(_ => MessagesEnqueued.Empty);
             }
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}/messages");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}/messages");
 
             var parameters =
                 new Dictionary<string, string>()
@@ -577,7 +577,7 @@
                     .Select(_ => MessagesEnqueued.Empty);
             }
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}/messages");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}/messages");
 
             var parameters =
                 new Dictionary<string, string>()
@@ -604,7 +604,7 @@
             if (messageId == null)
                 throw new ArgumentNullException("messageId");
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}/messages/{message_id}?claim_id={claim_id}");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}/messages/{message_id}?claim_id={claim_id}");
 
             var parameters =
                 new Dictionary<string, string>()
@@ -636,7 +636,7 @@
             if (messageIds.Contains(null))
                 throw new ArgumentException("messageIds cannot contain any null values");
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}/messages?ids={ids}");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}/messages?ids={ids}");
 
             var parameters =
                 new Dictionary<string, string>()
@@ -671,7 +671,7 @@
             if (gracePeriod < TimeSpan.Zero)
                 throw new ArgumentOutOfRangeException("gracePeriod");
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}/claims?limit={limit}");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}/claims?limit={limit}");
 
             var parameters =
                 new Dictionary<string, string>()
@@ -723,7 +723,7 @@
             if (claim == null)
                 throw new ArgumentNullException("claim");
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}/claims/{claim_id}");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}/claims/{claim_id}");
 
             var parameters =
                 new Dictionary<string, string>()
@@ -770,7 +770,7 @@
             if (timeToLive <= TimeSpan.Zero)
                 throw new ArgumentOutOfRangeException("timeToLive");
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}/claims/{claim_id}");
+            UriTemplate.Core.UriTemplate template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}/claims/{claim_id}");
 
             var parameters =
                 new Dictionary<string, string>()
@@ -799,7 +799,7 @@
             if (claim == null)
                 throw new ArgumentNullException("claim");
 
-            UriTemplate template = new UriTemplate("/queues/{queue_name}/claims/{claim_id}");
+            var template = new UriTemplate.Core.UriTemplate("/queues/{queue_name}/claims/{claim_id}");
 
             var parameters =
                 new Dictionary<string, string>()
@@ -850,7 +850,7 @@
         /// initial <see cref="HttpWebRequest"/>, and then sets the <c>Client-Id</c> header according
         /// to the Marconi (Cloud Queues) specification before returning.
         /// </remarks>
-        protected override HttpWebRequest PrepareRequestImpl(HttpMethod method, IdentityToken identityToken, UriTemplate template, Uri baseUri, IDictionary<string, string> parameters, Func<Uri, Uri> uriTransform)
+        protected override HttpWebRequest PrepareRequestImpl(HttpMethod method, IdentityToken identityToken, UriTemplate.Core.UriTemplate template, Uri baseUri, IDictionary<string, string> parameters, Func<Uri, Uri> uriTransform)
         {
             HttpWebRequest request = base.PrepareRequestImpl(method, identityToken, template, baseUri, parameters, uriTransform);
             request.Headers["Client-Id"] = _clientId.ToString("D");

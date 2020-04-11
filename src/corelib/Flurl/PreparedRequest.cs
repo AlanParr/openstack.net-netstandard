@@ -38,24 +38,6 @@ namespace Flurl.Http
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PreparedRequest"/> class.
-        /// </summary>
-        /// <param name="url">The URL.</param>
-        /// <param name="autoDispose">Specifies if the request should be automatically disposed.</param>
-        public PreparedRequest(string url, bool autoDispose) : base(url, autoDispose)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PreparedRequest"/> class.
-        /// </summary>
-        /// <param name="url">The URL.</param>
-        /// <param name="autoDispose">Specifies if the request should be automatically disposed.</param>
-        public PreparedRequest(Url url, bool autoDispose) : base(url, autoDispose)
-        {
-        }
-
-        /// <summary>
         /// The HTTP verb which will be used in the request.
         /// </summary>
         public HttpMethod Verb { get; protected set; }
@@ -130,8 +112,10 @@ namespace Flurl.Http
         {
             if(Verb == null)
                 throw new InvalidOperationException("Unable to execute request as nothing has been built yet.");
-
-            return SendAsync(Verb, Content, CancellationToken);
+            
+            //TODO:Pretty sure this is wrong.
+            return SendAsync();
+            //return SendAsync(Verb, Content, CancellationToken);
         }
     }
 

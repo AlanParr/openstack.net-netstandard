@@ -12,11 +12,11 @@ namespace OpenStack.Authentication
     public class AuthenticatedHttpClientFactory : DefaultHttpClientFactory
     {
         /// <inheritdoc/>
-        public override HttpClient CreateClient(Url url, HttpMessageHandler handler)
+        public override HttpClient CreateHttpClient(HttpMessageHandler handler)
         {
             return new HttpClient(handler)
             {
-                Timeout = FlurlHttp.GlobalSettings.DefaultTimeout
+                Timeout = FlurlHttp.GlobalSettings.Defaults.Timeout.GetValueOrDefault()
             };
         }
 

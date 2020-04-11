@@ -28,7 +28,7 @@ namespace OpenStack.Compute.v2_1.Operator
             {
                 Identifier serverId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Server { Id = serverId });
-                httpTest.RespondWith((int)HttpStatusCode.Accepted, "Roger that, boss");
+                httpTest.RespondWith("Roger that, boss", (int)HttpStatusCode.Accepted);
 
                 var server = _compute.GetServer(serverId);
                 await server.EvacuateAsync(new EvacuateServerRequest(false));

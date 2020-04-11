@@ -20,6 +20,7 @@
     using CancellationToken = System.Threading.CancellationToken;
     using IHttpResponseCodeValidator = net.openstack.Core.Validators.IHttpResponseCodeValidator;
     using JsonRestServices = JSIStudios.SimpleRESTServices.Client.Json.JsonRestServices;
+    using UriTemplate = UriTemplate.Core.UriTemplate;
 
     /// <summary>
     /// Provides an implementation of <see cref="ILoadBalancerService"/> for operating

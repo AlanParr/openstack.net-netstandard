@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using OpenStack;
-using OpenStack.Authentication;
+﻿using OpenStack.Authentication;
 
 namespace net.openstack.Providers.Hp
 {

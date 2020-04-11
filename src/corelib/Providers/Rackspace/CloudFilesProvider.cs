@@ -10,7 +10,6 @@ using System.Text;
 using JSIStudios.SimpleRESTServices.Client;
 using JSIStudios.SimpleRESTServices.Client.Json;
 using net.openstack.Core;
-using net.openstack.Core.Collections;
 using net.openstack.Core.Domain;
 using net.openstack.Core.Domain.Mapping;
 using net.openstack.Core.Exceptions;
@@ -1517,11 +1516,11 @@ namespace net.openstack.Providers.Rackspace
                 throw new ArgumentOutOfRangeException("chunkSize");
             CheckIdentity(identity);
 
-            UriTemplate template;
+            UriTemplate.Core.UriTemplate template;
             if (!string.IsNullOrEmpty(uploadPath))
-                template = new UriTemplate("{uploadPath}?extract-archive={archiveFormat}");
+                template = new UriTemplate.Core.UriTemplate("{uploadPath}?extract-archive={archiveFormat}");
             else
-                template = new UriTemplate("?extract-archive={archiveFormat}");
+                template = new UriTemplate.Core.UriTemplate("?extract-archive={archiveFormat}");
 
             Uri baseAddress = new Uri(GetServiceEndpointCloudFiles(identity, region, useInternalUrl));
             Dictionary<string, string> parameters = new Dictionary<string, string> { { "archiveFormat", archiveFormat.ToString() } };
@@ -1714,7 +1713,7 @@ namespace net.openstack.Providers.Rackspace
                 byte[] hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(body.ToString()));
                 string sig = string.Join(string.Empty, Array.ConvertAll(hash, i => i.ToString("x2")));
 
-                UriTemplate uriTemplate = new UriTemplate("{container}/{objectName}?temp_url_sig={sig}&temp_url_expires={expires}");
+                UriTemplate.Core.UriTemplate uriTemplate = new UriTemplate.Core.UriTemplate("{container}/{objectName}?temp_url_sig={sig}&temp_url_expires={expires}");
                 Dictionary<string, string> parameters = new Dictionary<string, string>()
                 {
                     { "container", container },
@@ -1851,7 +1850,7 @@ namespace net.openstack.Providers.Rackspace
                 byte[] hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(body.ToString()));
                 string sig = string.Join(string.Empty, Array.ConvertAll(hash, i => i.ToString("x2")));
 
-                UriTemplate uriTemplate = new UriTemplate("{container}/{objectPrefix}");
+                UriTemplate.Core.UriTemplate uriTemplate = new UriTemplate.Core.UriTemplate("{container}/{objectPrefix}");
                 Dictionary<string, string> parameters = new Dictionary<string, string>()
                 {
                     { "container", container },

@@ -187,7 +187,7 @@ namespace OpenStack.Compute.v2_1
             {
                 Identifier volumeId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Volume { Id = volumeId });
-                httpTest.RespondWith((int)responseCode, "All gone!");
+                httpTest.RespondWith("All gone!", (int)responseCode);
 
                 var volume = _compute.GetVolume(volumeId);
 
@@ -203,9 +203,9 @@ namespace OpenStack.Compute.v2_1
             {
                 Identifier volumeId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Volume { Id = volumeId, Status = VolumeStatus.Available });
-                httpTest.RespondWith((int)HttpStatusCode.Accepted, "All gone!");
+                httpTest.RespondWith("All gone!", (int)HttpStatusCode.Accepted);
                 httpTest.RespondWithJson(new Volume { Id = volumeId, Status = VolumeStatus.Deleting });
-                httpTest.RespondWith((int)HttpStatusCode.NotFound, "Not here, boss!");
+                httpTest.RespondWith("Not here, boss!", (int)HttpStatusCode.NotFound);
 
                 var result = _compute.GetVolume(volumeId);
                 result.Delete();
@@ -222,7 +222,7 @@ namespace OpenStack.Compute.v2_1
             {
                 Identifier snapshotId = Guid.NewGuid();
                 httpTest.RespondWithJson(new VolumeSnapshot { Id = snapshotId });
-                httpTest.RespondWith((int)responseCode, "All gone!");
+                httpTest.RespondWith("All gone!", (int)responseCode);
 
                 var snapshot = _compute.GetVolumeSnapshot(snapshotId);
 

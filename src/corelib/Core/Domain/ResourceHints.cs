@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using JSIStudios.SimpleRESTServices.Client;
+    using System.Net.Http;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Newtonsoft.Json.Linq;

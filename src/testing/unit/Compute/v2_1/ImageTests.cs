@@ -230,7 +230,7 @@ namespace OpenStack.Compute.v2_1
             using (var httpTest = new HttpTest())
             {
                 Identifier imageId = Guid.NewGuid();
-                httpTest.RespondWith((int)HttpStatusCode.NoContent, "All gone!");
+                httpTest.RespondWith("All gone!", (int)HttpStatusCode.NoContent);
 
                 _compute.DeleteImage(imageId);
 
@@ -245,7 +245,7 @@ namespace OpenStack.Compute.v2_1
             {
                 Identifier imageId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Image { Id = imageId });
-                httpTest.RespondWith((int)HttpStatusCode.NoContent, "All gone!");
+                httpTest.RespondWith("All gone!", (int)HttpStatusCode.NoContent);
                 httpTest.RespondWithJson(new Image { Id = imageId, Status = ImageStatus.Deleted });
 
                 var image = _compute.GetImage(imageId);
@@ -262,7 +262,7 @@ namespace OpenStack.Compute.v2_1
             using (var httpTest = new HttpTest())
             {
                 Identifier imageId = Guid.NewGuid();
-                httpTest.RespondWith((int)HttpStatusCode.NotFound, "Not here, boss...");
+                httpTest.RespondWith("Not here, boss...", (int)HttpStatusCode.NotFound);
 
                 _compute.DeleteImage(imageId);
 
@@ -277,7 +277,7 @@ namespace OpenStack.Compute.v2_1
             {
                 Identifier imageId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Image { Id = imageId, Status = ImageStatus.Active });
-                httpTest.RespondWith((int)HttpStatusCode.NoContent, "All gone!");
+                httpTest.RespondWith("All gone!", (int)HttpStatusCode.NoContent);
                 httpTest.RespondWithJson(new Image { Id = imageId, Status = ImageStatus.Deleted });
 
                 var result = _compute.GetImage(imageId);
@@ -295,8 +295,8 @@ namespace OpenStack.Compute.v2_1
             {
                 Identifier imageId = Guid.NewGuid();
                 httpTest.RespondWithJson(new Image { Id = imageId, Status = ImageStatus.Active });
-                httpTest.RespondWith((int)HttpStatusCode.NoContent, "All gone!");
-                httpTest.RespondWith((int)HttpStatusCode.NotFound, "Nothing here, boss");
+                httpTest.RespondWith("All gone!", (int)HttpStatusCode.NoContent);
+                httpTest.RespondWith("Nothing here, boss", (int)HttpStatusCode.NotFound);
 
                 var result = _compute.GetImage(imageId);
                 result.Delete();
@@ -321,7 +321,7 @@ namespace OpenStack.Compute.v2_1
                         [key] = "things"
                     }
                 });
-                httpTest.RespondWith((int)HttpStatusCode.NoContent, "All gone!");
+                httpTest.RespondWith("All gone!", (int)HttpStatusCode.NoContent);
 
                 var image = _compute.GetImage(imageId);
 
@@ -337,7 +337,7 @@ namespace OpenStack.Compute.v2_1
             using (var httpTest = new HttpTest())
             {
                 Identifier imageId = Guid.NewGuid();
-                httpTest.RespondWith((int)HttpStatusCode.NotFound, "Not here, boss...");
+                httpTest.RespondWith("Not here, boss...", (int)HttpStatusCode.NotFound);
 
                 _compute.DeleteImageMetadataAsync(imageId, "{invalid-key}");
             }

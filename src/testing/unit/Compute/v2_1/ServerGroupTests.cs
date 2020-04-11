@@ -82,7 +82,7 @@ namespace OpenStack.Compute.v2_1
             {
                 Identifier serverGroupId = Guid.NewGuid();
                 httpTest.RespondWithJson(new ServerGroup { Id = serverGroupId });
-                httpTest.RespondWith((int)responseCode, "All gone!");
+                httpTest.RespondWith("All gone!", (int)responseCode);
 
                 var serverGroup = _compute.GetServerGroup(serverGroupId);
 

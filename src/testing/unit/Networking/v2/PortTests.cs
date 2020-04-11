@@ -110,7 +110,7 @@ namespace OpenStack.Networking.v2
             using (var httpTest = new HttpTest())
             {
                 Identifier portId = Guid.NewGuid();
-                httpTest.RespondWith((int)HttpStatusCode.NoContent, "All gone!");
+                httpTest.RespondWith("All gone!", (int)HttpStatusCode.NoContent);
 
                 _networkingService.DeletePort(portId);
 
@@ -124,7 +124,7 @@ namespace OpenStack.Networking.v2
             using (var httpTest = new HttpTest())
             {
                 Identifier portId = Guid.NewGuid();
-                httpTest.RespondWith((int)HttpStatusCode.NotFound, "Not here, boss...");
+                httpTest.RespondWith("Not here, boss...", (int)HttpStatusCode.NotFound);
 
                 _networkingService.DeletePort(portId);
 

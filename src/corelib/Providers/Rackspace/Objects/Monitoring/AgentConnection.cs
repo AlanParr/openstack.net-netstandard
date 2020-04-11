@@ -1,6 +1,5 @@
 ﻿namespace net.openstack.Providers.Rackspace.Objects.Monitoring
 {
-    using System;
     using System.Net;
     using net.openstack.Core.Domain.Converters;
     using Newtonsoft.Json;

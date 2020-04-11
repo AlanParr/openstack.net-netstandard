@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Flurl.Http;
-using Flurl.Http.Configuration;
 
 namespace OpenStack.Authentication
 {
@@ -11,7 +10,7 @@ namespace OpenStack.Authentication
     /// Used by Flurl for all requests. Understands how to authenticate and retry when a token expires.
     /// </summary>
     /// <exclude />
-    internal class AuthenticatedMessageHandler : FlurlMessageHandler
+    internal class AuthenticatedMessageHandler : DelegatingHandler
     {
         public AuthenticatedMessageHandler(HttpMessageHandler innerHandler) 
             : base(innerHandler)

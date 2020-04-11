@@ -66,14 +66,17 @@ namespace OpenStack.Testing
 
             public TestHttpClientFactory(HttpTest test)
             {
-                _testMessageHandler = new Flurl.Http.Testing.TestHttpClientFactory(test);
+                //TODO: Where does test go?
+                _testMessageHandler = new Flurl.Http.Testing.TestHttpClientFactory();
                 _authenticatedClientFactory = new AuthenticatedHttpClientFactory();
             }
 
             public HttpClient CreateClient(Url url, HttpMessageHandler handler)
             {
-                return _authenticatedClientFactory.CreateClient(url, handler);
+                return _authenticatedClientFactory.CreateHttpClient(handler);
             }
+
+            public HttpClient CreateHttpClient(HttpMessageHandler handler) => _authenticatedClientFactory.CreateHttpClient(handler);
 
             public HttpMessageHandler CreateMessageHandler()
             {

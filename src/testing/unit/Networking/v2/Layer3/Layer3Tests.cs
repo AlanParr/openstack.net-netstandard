@@ -97,7 +97,7 @@ namespace OpenStack.Networking.v2.Layer3
                 {
                     new Port {Id = portId}
                 });
-                httpTest.RespondWith((int)responseCode, "All gone!");
+                httpTest.RespondWith("All gone!", (int)responseCode);
 
                 var router = _networking.GetRouter(routerId);
                 router.Delete();
@@ -234,7 +234,7 @@ namespace OpenStack.Networking.v2.Layer3
                 Identifier serverId = Guid.NewGuid();
                 const string ip = "10.0.0.1";
                 httpTest.RespondWithJson(new Server { Id = serverId });
-                httpTest.RespondWith((int)HttpStatusCode.OK, "ip associated!");
+                httpTest.RespondWith("ip associated!", (int)HttpStatusCode.OK);
                 httpTest.RespondWithJson(new ServerAddressCollection
                 {
                     ["network1"] = new List<ServerAddress>
@@ -288,7 +288,7 @@ namespace OpenStack.Networking.v2.Layer3
                         }
                     }
                 });
-                httpTest.RespondWith((int)HttpStatusCode.OK, "ip disassociated!");
+                httpTest.RespondWith("ip disassociated!", (int)HttpStatusCode.OK);
 
                 var server = compute.GetServer(serverId);
                 server.DisassociateFloatingIP(ip);
@@ -305,7 +305,7 @@ namespace OpenStack.Networking.v2.Layer3
             using (var httpTest = new HttpTest())
             {
                 Identifier floatingIPId = Guid.NewGuid();
-                httpTest.RespondWith((int)responseCode, "All gone!");
+                httpTest.RespondWith("All gone!", (int)responseCode);
 
                 _networking.DeleteFloatingIP(floatingIPId);
 

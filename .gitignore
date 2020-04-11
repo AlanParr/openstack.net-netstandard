@@ -35,6 +35,7 @@ obj/
 [Rr]elease*/
 Ankh.NoLoad
 *.DotSettings
+*.vs/
 
 # Roslyn IntelliSense Cache
 *.sln.ide/

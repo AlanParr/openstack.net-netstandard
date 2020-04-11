@@ -124,7 +124,7 @@ namespace OpenStack.Compute.v2_1
             using (var httpTest = new HttpTest())
             {
                 httpTest.RespondWithJson(new KeyPair {Name = "keypair-name"});
-                httpTest.RespondWith((int) responseCode, "All gone!");
+                httpTest.RespondWith("All gone!", (int)responseCode);
 
                 KeyPairSummary result = _computeService.GetKeyPair("keypair-name");
                 result.Delete();

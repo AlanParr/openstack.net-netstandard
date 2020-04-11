@@ -6,7 +6,6 @@ namespace net.openstack.Core.Domain
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
-    using net.openstack.Core.Collections;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using IEnumerable = System.Collections.IEnumerable;

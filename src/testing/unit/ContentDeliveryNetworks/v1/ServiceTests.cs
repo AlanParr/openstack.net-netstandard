@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Flurl;
 using Flurl.Extensions;
-using Marvin.JsonPatch;
+using Microsoft.AspNetCore.JsonPatch;
 using Newtonsoft.Json;
 using OpenStack.Serialization;
 using OpenStack.Synchronous;
@@ -133,7 +133,7 @@ namespace OpenStack.ContentDeliveryNetworks.v1
         {
             using (var httpTest = new HttpTest())
             {
-                httpTest.RespondWith((int)HttpStatusCode.NoContent, "All gone!");
+                httpTest.RespondWith("All gone!", (int)HttpStatusCode.NoContent);
 
                 _cdnService.DeleteService("service-id");
             }
@@ -200,7 +200,7 @@ namespace OpenStack.ContentDeliveryNetworks.v1
             using (var httpTest = new HttpTest())
             {
                 httpTest.RespondWithJson(new Service { Status = ServiceStatus.DeleteInProgress });
-                httpTest.RespondWith((int)HttpStatusCode.NotFound, "All gone!");
+                httpTest.RespondWith("All gone!", (int)HttpStatusCode.NotFound);
 
                 _cdnService.WaitForServiceDeleted("service-id", TimeSpan.FromMilliseconds(1));
             }
@@ -252,7 +252,7 @@ namespace OpenStack.ContentDeliveryNetworks.v1
         {
             using (var httpTest = new HttpTest())
             {
-                httpTest.RespondWith((int)HttpStatusCode.NotFound, "Nothing to see here!");
+                httpTest.RespondWith("Nothing to see here!", (int)HttpStatusCode.NotFound);
 
                 _cdnService.DeleteService("bad-service-id");
             }
@@ -293,7 +293,7 @@ namespace OpenStack.ContentDeliveryNetworks.v1
         {
             using (var httpTest = new HttpTest())
             {
-                httpTest.RespondWith((int)HttpStatusCode.NotFound, "Nothing to see here!");
+                httpTest.RespondWith("Nothing to see here!", (int)HttpStatusCode.NotFound);
 
                 _cdnService.PurgeCachedAsset("service-id", "missing-asset");
             }

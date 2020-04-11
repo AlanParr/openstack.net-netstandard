@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using Flurl.Http;
-using Marvin.JsonPatch;
+using Microsoft.AspNetCore.JsonPatch;
 using OpenStack.ContentDeliveryNetworks.v1;
 using OpenStack.Synchronous.Extensions;
 

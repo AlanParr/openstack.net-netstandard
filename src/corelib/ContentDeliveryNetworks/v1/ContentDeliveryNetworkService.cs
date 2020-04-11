@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Flurl;
 using Flurl.Extensions;
 using Flurl.Http;
-using Marvin.JsonPatch;
+using Microsoft.AspNetCore.JsonPatch;
 using OpenStack.Authentication;
 using OpenStack.Serialization;
 
@@ -53,7 +53,9 @@ namespace OpenStack.ContentDeliveryNetworks.v1
             return await endpoint
                 .AppendPathSegments("flavors", flavorId)
                 .Authenticate(_authenticationProvider)
-                .GetJsonAsync<Flavor>(cancellationToken)
+                .PrepareGet(cancellationToken)
+                .SendAsync()
+                .ReceiveJson<Flavor>()
                 .ConfigureAwait(false);
         }
 
@@ -65,7 +67,9 @@ namespace OpenStack.ContentDeliveryNetworks.v1
             return await endpoint
                 .AppendPathSegments("flavors")
                 .Authenticate(_authenticationProvider)
-                .GetJsonAsync<FlavorCollection>(cancellationToken)
+                .PrepareGet(cancellationToken)
+                .SendAsync()
+                .ReceiveJson<FlavorCollection>()
                 .ConfigureAwait(false);
         }
 
@@ -77,7 +81,9 @@ namespace OpenStack.ContentDeliveryNetworks.v1
             await endpoint
                 .AppendPathSegments("ping")
                 .Authenticate(_authenticationProvider)
-                .GetAsync(cancellationToken)
+                .PrepareGet(cancellationToken)
+                .SendAsync()
+                .ReceiveJson()
                 .ConfigureAwait(false);
         }
 
@@ -101,7 +107,9 @@ namespace OpenStack.ContentDeliveryNetworks.v1
         {
             ServiceCollection result = await url
                 .Authenticate(_authenticationProvider)
-                .GetJsonAsync<ServiceCollection>(cancellationToken)
+                .PrepareGet(cancellationToken)
+                .SendAsync()
+                .ReceiveJson<ServiceCollection>()
                 .ConfigureAwait(false);
 
             ((IPageBuilder<ServiceCollection>)result).SetNextPageHandler(ListServicesAsync);
@@ -120,7 +128,9 @@ namespace OpenStack.ContentDeliveryNetworks.v1
             return await endpoint
                 .AppendPathSegments("services", serviceId)
                 .Authenticate(_authenticationProvider)
-                .GetJsonAsync<Service>(cancellationToken)
+                .PrepareGet(cancellationToken)
+                .SendAsync()
+                .ReceiveJson<Service>()
                 .ConfigureAwait(false);
         }
 
@@ -135,7 +145,8 @@ namespace OpenStack.ContentDeliveryNetworks.v1
             var response = await endpoint
                 .AppendPathSegments("services")
                 .Authenticate(_authenticationProvider)
-                .PostJsonAsync(service, cancellationToken)
+                .PreparePostJson(service, cancellationToken)
+                .SendAsync()
                 .ConfigureAwait(false);
 
             var location = response.Headers.Location;
@@ -154,7 +165,8 @@ namespace OpenStack.ContentDeliveryNetworks.v1
                 .AppendPathSegments("services", serviceId)
                 .Authenticate(_authenticationProvider)
                 .AllowHttpStatus(HttpStatusCode.NotFound)
-                .DeleteAsync(cancellationToken)
+                .PrepareDelete(cancellationToken)
+                .SendAsync()
                 .ConfigureAwait(false);
         }
 
@@ -171,7 +183,8 @@ namespace OpenStack.ContentDeliveryNetworks.v1
             await endpoint
                 .AppendPathSegments("services", serviceId)
                 .Authenticate(_authenticationProvider)
-                .PatchJsonAsync(patch, cancellationToken)
+                .PreparePatchJson(patch, cancellationToken)
+                .SendAsync()
                 .ConfigureAwait(false);
         }
 
@@ -190,7 +203,7 @@ namespace OpenStack.ContentDeliveryNetworks.v1
                 .SetQueryParam("url", url)
                 .Authenticate(_authenticationProvider)
                 .AllowHttpStatus(HttpStatusCode.NotFound)
-                .DeleteAsync(cancellationToken)
+                .PrepareDelete(cancellationToken).SendAsync()
                 .ConfigureAwait(false);
         }
 
@@ -206,7 +219,7 @@ namespace OpenStack.ContentDeliveryNetworks.v1
                 .AppendPathSegments("services", serviceId, "assets")
                 .SetQueryParam("all", true)
                 .Authenticate(_authenticationProvider)
-                .DeleteAsync(cancellationToken)
+                .PrepareDelete(cancellationToken).SendAsync()
                 .ConfigureAwait(false);
         }
 

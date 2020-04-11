@@ -1,7 +1,6 @@
 ﻿namespace net.openstack.Core
 {
     using System;
-    using System.Collections.Concurrent;
     using net.openstack.Core.Domain.Converters;
 
     /// <summary>
