@@ -41,7 +41,7 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
                 cloudNetworksValidator.ValidateCidr(cidr);
             });
 
-            Assert.Equal("Value cannot be null." + Environment.NewLine + "Parameter name: cidr", ex.Message);
+            Assert.Equal("Value cannot be null. (Parameter 'cidr')", ex.Message);
         }
 
         [Fact]

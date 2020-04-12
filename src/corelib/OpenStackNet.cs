@@ -143,6 +143,8 @@ namespace OpenStack
 
             private static string SerializeHttpCall(HttpCall httpCall)
             {
+                //TODO: This is causing outofmemory exceptions, need to fix.
+                return string.Empty;
                 var settings = new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore

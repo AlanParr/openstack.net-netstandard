@@ -289,7 +289,7 @@ namespace OpenStack.Networking.v2
         {
             PreparedRequest request = await Endpoint.PrepareGetResourceRequest("ports", cancellationToken).ConfigureAwait(false);
 
-            request.BaseUrl.SetQueryParams(queryString?.Build());
+            request.BaseUrl = request.BaseUrl.SetQueryParams(queryString?.Build());
 
             return request;
         }
@@ -501,7 +501,7 @@ namespace OpenStack.Networking.v2
         {
             PreparedRequest request = await Endpoint.PrepareGetResourceRequest("routers", cancellationToken).ConfigureAwait(false);
 
-            request.BaseUrl.SetQueryParams(queryString?.Build());
+            request.BaseUrl = request.BaseUrl.SetQueryParams(queryString?.Build());
 
             return request;
         }
@@ -855,7 +855,7 @@ namespace OpenStack.Networking.v2
         {
             PreparedRequest request = await Endpoint.PrepareGetResourceRequest("floatingips", cancellationToken).ConfigureAwait(false);
 
-            request.BaseUrl.SetQueryParams(queryString?.Build());
+            request.BaseUrl = request.BaseUrl.SetQueryParams(queryString?.Build());
 
             return request;
         }

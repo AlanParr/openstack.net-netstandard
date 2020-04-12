@@ -43,7 +43,7 @@ namespace OpenStack.Networking.v2
 
                 _networkingService.ListPorts(new PortListOptions {DeviceId = "123"});
 
-                httpTest.ShouldHaveCalled("*/ports?device_id=123");
+                httpTest.ShouldHaveCalled("/ports?device_id=123");
             }
         }
 

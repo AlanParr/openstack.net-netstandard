@@ -112,10 +112,8 @@ namespace Flurl.Http
         {
             if(Verb == null)
                 throw new InvalidOperationException("Unable to execute request as nothing has been built yet.");
-            
-            //TODO:Pretty sure this is wrong.
-            return SendAsync();
-            //return SendAsync(Verb, Content, CancellationToken);
+
+            return Request().SendAsync(Verb, Content, CancellationToken);
         }
     }
 

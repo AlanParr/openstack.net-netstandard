@@ -34,9 +34,9 @@ namespace OpenStack.ContentDeliveryNetworks.v1
         public ContentDeliveryNetworkService(IAuthenticationProvider authenticationProvider, string region, bool useInternalUrl = false)
         {
             if (authenticationProvider == null)
-                throw new ArgumentNullException("authenticationProvider");
+                throw new ArgumentNullException(nameof(authenticationProvider));
             if (string.IsNullOrEmpty(region))
-                throw new ArgumentException("region cannot be null or empty", "region");
+                throw new ArgumentException("region cannot be null or empty", nameof(region));
 
             _authenticationProvider = authenticationProvider;
             _endpoint = new ServiceEndpoint(ServiceType.ContentDeliveryNetwork, authenticationProvider, region, useInternalUrl);
@@ -46,17 +46,36 @@ namespace OpenStack.ContentDeliveryNetworks.v1
         public async Task<Flavor> GetFlavorAsync(string flavorId, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (string.IsNullOrEmpty(flavorId))
-                throw new ArgumentNullException("flavorId");
+                throw new ArgumentNullException(nameof(flavorId));
 
             string endpoint = await _endpoint.GetEndpoint(cancellationToken).ConfigureAwait(false);
 
-            return await endpoint
+            Flavor result = null;
+            try
+            {
+                result = await endpoint
+                    .AppendPathSegments("flavors", flavorId)
+                    .Authenticate(_authenticationProvider)
+                    .PrepareGet(cancellationToken)
+                    .SendAsync()
+                    .ReceiveJson<Flavor>()
+                    .ConfigureAwait(false);
+            }
+            catch (FlurlHttpException ex)
+            {
+                if(ex.Call.HttpStatus == HttpStatusCode.Unauthorized)
+                {
+                    return await endpoint
                 .AppendPathSegments("flavors", flavorId)
                 .Authenticate(_authenticationProvider)
                 .PrepareGet(cancellationToken)
                 .SendAsync()
                 .ReceiveJson<Flavor>()
                 .ConfigureAwait(false);
+                }
+            }
+
+            return result;
         }
 
         /// <inheritdoc />

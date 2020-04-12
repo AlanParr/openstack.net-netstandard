@@ -41,7 +41,7 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
                 objectStoreValidator.ValidateContainerName(containerName);
             });
 
-            Assert.Equal("ERROR: Container Name cannot be empty." + Environment.NewLine + "Parameter name: containerName", ex.Message);
+            Assert.Equal("ERROR: Container Name cannot be empty. (Parameter 'containerName')", ex.Message);
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace OpenStackNet.Testing.Unit.Providers.Rackspace
                 objectStoreValidator.ValidateContainerName(containerName);
             });
 
-            Assert.Equal("Value cannot be null." + Environment.NewLine + "Parameter name: containerName", ex.Message);
+            Assert.Equal("Value cannot be null. (Parameter 'containerName')", ex.Message);
         }
 
         [Fact]

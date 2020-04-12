@@ -71,16 +71,11 @@ namespace OpenStack.Testing
                 _authenticatedClientFactory = new AuthenticatedHttpClientFactory();
             }
 
-            public HttpClient CreateClient(Url url, HttpMessageHandler handler)
-            {
-                return _authenticatedClientFactory.CreateHttpClient(handler);
-            }
-
             public HttpClient CreateHttpClient(HttpMessageHandler handler) => _authenticatedClientFactory.CreateHttpClient(handler);
 
             public HttpMessageHandler CreateMessageHandler()
             {
-                return new AuthenticatedMessageHandler(_testMessageHandler.CreateMessageHandler());
+                return new AuthenticatedMessageHandler(_authenticatedClientFactory.CreateMessageHandler());
             }
         }
     }
