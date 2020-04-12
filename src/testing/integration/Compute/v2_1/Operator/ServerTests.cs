@@ -56,7 +56,7 @@ namespace OpenStack.Compute.v2_1.Operator
             {
                 await server.EvacuateAsync(request);
             }
-            catch (FlurlHttpException httpError) when (httpError.Call.ErrorResponseBody.Contains("is still in use"))
+            catch (FlurlHttpException httpError) when ((httpError.Call.Response.Content.ReadAsStringAsync().Result).Contains("is still in use"))
             {
                 // Hurray! the test passed
             }

@@ -46,7 +46,6 @@ namespace OpenStackNet.Testing.Unit.Domain.Mapping
             string obj = "{\"public\": []}";
             var actual = JsonConvert.DeserializeObject<ServerAddresses>(obj).Single();
 
-            Assert.NotNull(actual);
             Assert.Empty(actual.Value);
         }
 
@@ -57,8 +56,7 @@ namespace OpenStackNet.Testing.Unit.Domain.Mapping
             string obj = "{\"public\": [{\"version\": 4, \"addr\": \"166.78.156.150\"}]}";
             var actual = JsonConvert.DeserializeObject<ServerAddresses>(obj).Single();
 
-            Assert.NotNull(actual);
-            Assert.Equal(1, actual.Value.Count);
+            Assert.Single(actual.Value);
             Assert.True(actual.Value.All(x => x != null));
             Assert.Equal(AddressFamily.InterNetwork, actual.Value[0].AddressFamily);
             Assert.Equal(IPAddress.Parse("166.78.156.150"), actual.Value[0]);
@@ -71,7 +69,6 @@ namespace OpenStackNet.Testing.Unit.Domain.Mapping
             string obj = "{\"public\": [{\"version\": 4, \"addr\": \"166.78.156.150\"}, {\"version\": 6, \"addr\": \"2001:4800:7812:0514:95e4:7f4d:ff04:d1eb\"}]}";
             var actual = JsonConvert.DeserializeObject<ServerAddresses>(obj).Single();
 
-            Assert.NotNull(actual);
             Assert.Equal(2, actual.Value.Count);
             Assert.True(actual.Value.All(x => x != null));
             Assert.Equal(AddressFamily.InterNetwork, actual.Value[0].AddressFamily);
@@ -87,7 +84,6 @@ namespace OpenStackNet.Testing.Unit.Domain.Mapping
             string obj = "{\"public\": [{\"version\": 4, \"addr\": \"166.78.156.150\"}, {\"version\": 6, \"addr\": \"2001:4800:7812:0514:95e4:7f4d:ff04:d1eb\"}]}";
             var actual = JsonConvert.DeserializeObject<ServerAddresses>(obj).Single();
 
-            Assert.NotNull(actual);
             Assert.NotNull(actual.Value.SingleOrDefault(a => a.AddressFamily == AddressFamily.InterNetwork));
             Assert.NotNull(actual.Value.SingleOrDefault(a => a.AddressFamily == AddressFamily.InterNetworkV6));
         }

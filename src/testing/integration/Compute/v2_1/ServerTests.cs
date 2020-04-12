@@ -389,7 +389,7 @@ namespace OpenStack.Compute.v2_1
             {
                 await server.GetVncConsoleAsync(RemoteConsoleType.NoVnc);
             }
-            catch (FlurlHttpException httpError) when (httpError.Call.ErrorResponseBody.Contains("Unavailable console type novnc"))
+            catch (FlurlHttpException httpError) when (httpError.Call.Response.Content.ReadAsStringAsync().Result.Contains("Unavailable console type novnc"))
             {
             }
 
@@ -406,7 +406,7 @@ namespace OpenStack.Compute.v2_1
             {
                 await server.GetSerialConsoleAsync();
             }
-            catch (FlurlHttpException httpError) when (httpError.Call.ErrorResponseBody.Contains("Unavailable console type serial"))
+            catch (FlurlHttpException httpError) when (httpError.Call.Response.Content.ReadAsStringAsync().Result.Contains("Unavailable console type serial"))
             {
             }
 
@@ -417,7 +417,7 @@ namespace OpenStack.Compute.v2_1
             {
                 await server.GetRdpConsoleAsync();
             }
-            catch (FlurlHttpException httpError) when (httpError.Call.ErrorResponseBody.Contains("Unavailable console type rdp-html5"))
+            catch (FlurlHttpException httpError) when (httpError.Call.Response.Content.ReadAsStringAsync().Result.Contains("Unavailable console type rdp-html5"))
             {
             }
 

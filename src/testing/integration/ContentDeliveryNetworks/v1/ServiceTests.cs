@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Marvin.JsonPatch;
+using Microsoft.AspNetCore.JsonPatch;
 using Newtonsoft.Json;
 using OpenStack.Synchronous;
 using Xunit;

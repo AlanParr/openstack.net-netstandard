@@ -43,13 +43,13 @@ namespace OpenStack.Testing
         }
 
         /// <inheritdoc />
-        public new HttpTest RespondWithJson(object data)
+        public HttpTest RespondWithJson(object data)
         {
             return RespondWithJson(200, data);
         }
 
         /// <inheritdoc />
-        public new HttpTest RespondWithJson(int status, object data)
+        public HttpTest RespondWithJson(int status, object data)
         {
             ResponseQueue.Enqueue(new HttpResponseMessage
             {
