@@ -7,3 +7,6 @@ I have only done this because the Rackspace support for .net is so out of date a
 Please note I have only tested the CloudFiles APIs as they are all I need, so all bets are off on any parts of the library I do not use.
 
 I hope this is useful to someone.
+
+
+Please note there is still a dependency on SimpleRESTServices which is a .net 4.5 package, but I am using this in a .Net Core app and it seems to work okay. YMMV.
